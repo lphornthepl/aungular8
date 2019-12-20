@@ -1,0 +1,21 @@
+label {
+  font-weight: 600;
+}
+
+.news-image {
+  width: 100%;
+  text-align: center;
+}
+
+.no-img {
+  background: url('http://lamp.oja.go.th/MediaNewsIMG/default-image.png');
+  background-repeat: repeat-x;
+}
+
+.news-title, .news-details {
+  color: rgba($color: #000000, $alpha: 0.87);
+}
+
+.news-author, .news-time {
+  color: rgba($color: #000000, $alpha: 0.6);
+}

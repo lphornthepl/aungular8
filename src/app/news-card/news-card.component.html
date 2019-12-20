@@ -1,0 +1,48 @@
+<div class="container" style="margin-top: 64px;">
+  <div class="row" style="margin-bottom: 24px;">
+    <div class="col-lg-12 search-section">
+      <input type="text" (keyup)="updateSearch($event.target.value)" />
+      <ul class="search-result-list" *ngIf="filteredData">
+        <li class="search-result" *ngFor="let item of filteredData">
+          <div class="result" routerLink="/detail/{{item.title}}">
+            <div class="overflow">
+              <img class="result-img" src="{{item.urlToImage}}">
+            </div>
+            <div class="result-title">
+              {{item.title}}
+            </div>
+          </div>
+          <hr />
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let news of allNews | paginate: { itemsPerPage: 9, currentPage: p }">
+      <div class="card mb-4 shadow-sm" [class.selected]="news === selectedNews">
+        <div class="news-thubnail">
+          <div *ngIf="news.urlToImage; else noImg">
+            <img src="{{news.urlToImage}}" class="img-fluid">
+          </div>
+          <ng-template #noImg>
+            <img src="http://lamp.oja.go.th/MediaNewsIMG/default-image.png" class="img-fluid">
+          </ng-template>
+        </div>
+        <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
+        <div class="card-body">
+          <p class="card-text">{{news.title}}</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+              <button type="button" class="btn btn-sm btn-outline-secondary" (click)="onSelect(news)"
+                routerLink="/detail/{{news.title}}">View</button>
+            </div>
+            <small class="text-muted">{{news.publishedAt | fromNow}}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" style="text-align: center; margin-left: auto; margin-right: auto;">
+    <pagination-controls (pageChange)="p = $event" style="margin-left: auto; margin-right: auto;"></pagination-controls>
+  </div>
+</div>
